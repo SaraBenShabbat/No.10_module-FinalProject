@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-deploy
+  labels:
+    app: java-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      containers:
+      - name: java-app
+        image: 10.0.0.6:8083/java-app:165
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: secret-nexus
+
